@@ -155,3 +155,12 @@ if chat_message:
     st.session_state.messages.append({"role": "user", "content": chat_message})
     # 表示用の会話ログにAIメッセージを追加
     st.session_state.messages.append({"role": "assistant", "content": content})
+
+#追加
+    if __name__ == "__main__":
+    load_dotenv()
+    initialize()  # ← initialize() が初期化処理なら実行
+
+    # Streamlitの画面表示
+    st.title("ようこそ！社内情報検索アプリへ")
+    st.write("このアプリでは社内ドキュメントの検索ができます。")

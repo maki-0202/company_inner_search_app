@@ -44,8 +44,9 @@ try:
 except Exception as e:
     # エラーログの出力
     logger.error(f"{ct.INITIALIZE_ERROR_MESSAGE}\n{e}")
-    # エラーメッセージの画面表示
-    st.error(utils.build_error_message(ct.INITIALIZE_ERROR_MESSAGE), icon=ct.ERROR_ICON)
+    # エラーメッセージの画面表示　変更20250626 20:30
+    st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
+
     # 後続の処理を中断
     st.stop()
 
@@ -78,7 +79,7 @@ except Exception as e:
     # エラーログの出力
     logger.error(f"{ct.CONVERSATION_LOG_ERROR_MESSAGE}\n{e}")
     # エラーメッセージの画面表示
-    st.error(utils.build_error_message(ct.CONVERSATION_LOG_ERROR_MESSAGE), icon=ct.ERROR_ICON)
+    st.error(ct.CONVERSATION_LOG_ERROR_MESSAGE, icon=ct.ERROR_ICON)
     # 後続の処理を中断
     st.stop()
 
@@ -117,7 +118,7 @@ if chat_message:
             # エラーログの出力
             logger.error(f"{ct.GET_LLM_RESPONSE_ERROR_MESSAGE}\n{e}")
             # エラーメッセージの画面表示
-            st.error(utils.build_error_message(ct.GET_LLM_RESPONSE_ERROR_MESSAGE), icon=ct.ERROR_ICON)
+            st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
             # 後続の処理を中断
             st.stop()
     
@@ -146,7 +147,7 @@ if chat_message:
             # エラーログの出力
             logger.error(f"{ct.DISP_ANSWER_ERROR_MESSAGE}\n{e}")
             # エラーメッセージの画面表示
-            st.error(utils.build_error_message(ct.DISP_ANSWER_ERROR_MESSAGE), icon=ct.ERROR_ICON)
+            st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
             # 後続の処理を中断
             st.stop()
 
@@ -157,11 +158,3 @@ if chat_message:
     st.session_state.messages.append({"role": "user", "content": chat_message})
     # 表示用の会話ログにAIメッセージを追加
     st.session_state.messages.append({"role": "assistant", "content": content})
-
-#追加
-if __name__ == "__main__":
-    load_dotenv()
-    initialize()
-    st.title("ようこそ！社内情報検索アプリへ")
-    st.write("このアプリでは社内ドキュメントの検索ができます。")
-

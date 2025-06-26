@@ -8,6 +8,7 @@
 # 「.env」ファイルから環境変数を読み込むための関数
 from dotenv import load_dotenv
 load_dotenv() # .env読み込み2025/06/26 20:15
+api_key = os.getenv("OPENAI_API_KEY")
 # ログ出力を行うためのモジュール
 import logging
 # streamlitアプリの表示を担当するモジュール

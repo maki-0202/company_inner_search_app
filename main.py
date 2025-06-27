@@ -6,10 +6,7 @@
 # 1. ライブラリの読み込み
 ############################################################
 # 「.env」ファイルから環境変数を読み込むための関数
-import os
 from dotenv import load_dotenv
-load_dotenv() # .env読み込み2025/06/26 20:15
-api_key = os.getenv("OPENAI_API_KEY")
 # ログ出力を行うためのモジュール
 import logging
 # streamlitアプリの表示を担当するモジュール
@@ -27,7 +24,6 @@ import constants as ct
 ############################################################
 # 2. 設定関連
 ############################################################
-
 # ブラウザタブの表示文言を設定
 st.set_page_config(
     page_title=ct.APP_NAME
@@ -46,9 +42,8 @@ try:
 except Exception as e:
     # エラーログの出力
     logger.error(f"{ct.INITIALIZE_ERROR_MESSAGE}\n{e}")
-    # エラーメッセージの画面表示　変更20250626 20:30
-    st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
-
+    # エラーメッセージの画面表示
+    st.error(utils.build_error_message(ct.INITIALIZE_ERROR_MESSAGE), icon=ct.ERROR_ICON)
     # 後続の処理を中断
     st.stop()
 
@@ -81,7 +76,7 @@ except Exception as e:
     # エラーログの出力
     logger.error(f"{ct.CONVERSATION_LOG_ERROR_MESSAGE}\n{e}")
     # エラーメッセージの画面表示
-    st.error(ct.CONVERSATION_LOG_ERROR_MESSAGE, icon=ct.ERROR_ICON)
+    st.error(utils.build_error_message(ct.CONVERSATION_LOG_ERROR_MESSAGE), icon=ct.ERROR_ICON)
     # 後続の処理を中断
     st.stop()
 
@@ -120,7 +115,7 @@ if chat_message:
             # エラーログの出力
             logger.error(f"{ct.GET_LLM_RESPONSE_ERROR_MESSAGE}\n{e}")
             # エラーメッセージの画面表示
-            st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
+            st.error(utils.build_error_message(ct.GET_LLM_RESPONSE_ERROR_MESSAGE), icon=ct.ERROR_ICON)
             # 後続の処理を中断
             st.stop()
     
@@ -149,7 +144,7 @@ if chat_message:
             # エラーログの出力
             logger.error(f"{ct.DISP_ANSWER_ERROR_MESSAGE}\n{e}")
             # エラーメッセージの画面表示
-            st.error(ct.INITIALIZE_ERROR_MESSAGE, icon=ct.ERROR_ICON)
+            st.error(utils.build_error_message(ct.DISP_ANSWER_ERROR_MESSAGE), icon=ct.ERROR_ICON)
             # 後続の処理を中断
             st.stop()
 
